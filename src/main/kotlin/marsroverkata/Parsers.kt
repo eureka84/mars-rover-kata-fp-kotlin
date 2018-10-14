@@ -1,13 +1,9 @@
 package marsroverkata
 
-import marsroverkata.Models.Position
-import marsroverkata.Models.Planet
 import marsroverkata.Models.Command
-import marsroverkata.Models.Command.MoveBackward
-import marsroverkata.Models.Command.MoveForward
-import marsroverkata.Models.Command.TurnLeft
-import marsroverkata.Models.Command.TurnRight
-import marsroverkata.Models.Command.UnknownCommand
+import marsroverkata.Models.Command.*
+import marsroverkata.Models.Planet
+import marsroverkata.Models.Position
 
 object Parsers {
 

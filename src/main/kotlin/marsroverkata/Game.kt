@@ -1,7 +1,8 @@
 package marsroverkata
 
-import marsroverkata.Models.Rover
+import arrow.effects.IO
 import marsroverkata.Models.Direction.N
+import marsroverkata.Models.Rover
 import marsroverkata.UseCases.display
 import marsroverkata.UseCases.handleCommands
 import marsroverkata.UseCases.readCommands
@@ -9,7 +10,6 @@ import marsroverkata.UseCases.readObstacles
 import marsroverkata.UseCases.readPlanet
 import marsroverkata.UseCases.readPosition
 import marsroverkata.UseCases.welcome
-import arrow.effects.IO
 
 class Game {
 

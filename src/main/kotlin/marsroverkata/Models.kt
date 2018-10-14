@@ -1,6 +1,7 @@
 package marsroverkata
 
 object Models {
+
     data class Planet(val width: Int, val height: Int, val obstacles: List<Position> = listOf())
     data class Position(val x: Int, val y: Int)
     data class Rover(val position: Position, val direction: Direction, val planet: Planet)
