@@ -1,9 +1,9 @@
 package marsroverkata
 
-import marsroverkata.Models.Command
-import marsroverkata.Models.Command.*
-import marsroverkata.Models.Planet
-import marsroverkata.Models.Position
+import marsroverkata.Data.Command
+import marsroverkata.Data.Command.*
+import marsroverkata.Data.Planet
+import marsroverkata.Data.Position
 
 object Parsers {
 

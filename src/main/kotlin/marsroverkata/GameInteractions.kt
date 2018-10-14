@@ -4,11 +4,11 @@ import arrow.core.Option
 import arrow.core.Some
 import arrow.effects.IO
 import arrow.syntax.collections.tail
-import marsroverkata.Models.Command
-import marsroverkata.Models.Command.*
-import marsroverkata.Models.Planet
-import marsroverkata.Models.Position
-import marsroverkata.Models.Rover
+import marsroverkata.Data.Command
+import marsroverkata.Data.Command.*
+import marsroverkata.Data.Planet
+import marsroverkata.Data.Position
+import marsroverkata.Data.Rover
 import marsroverkata.Parsers.parseCommands
 import marsroverkata.Parsers.parseObstacles
 import marsroverkata.Parsers.parsePlanet
@@ -21,7 +21,7 @@ import marsroverkata.IoOps.ask
 import marsroverkata.IoOps.puts
 
 
-object UseCases {
+object GameInteractions {
 
     fun welcome() = puts("Welcome to the Mars Rover Kata!")
 

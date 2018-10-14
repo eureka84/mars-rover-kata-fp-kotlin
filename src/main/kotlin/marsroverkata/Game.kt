@@ -1,15 +1,15 @@
 package marsroverkata
 
 import arrow.effects.IO
-import marsroverkata.Models.Direction.N
-import marsroverkata.Models.Rover
-import marsroverkata.UseCases.display
-import marsroverkata.UseCases.handleCommands
-import marsroverkata.UseCases.readCommands
-import marsroverkata.UseCases.readObstacles
-import marsroverkata.UseCases.readPlanet
-import marsroverkata.UseCases.readPosition
-import marsroverkata.UseCases.welcome
+import marsroverkata.Data.Direction.N
+import marsroverkata.Data.Rover
+import marsroverkata.GameInteractions.display
+import marsroverkata.GameInteractions.handleCommands
+import marsroverkata.GameInteractions.readCommands
+import marsroverkata.GameInteractions.readObstacles
+import marsroverkata.GameInteractions.readPlanet
+import marsroverkata.GameInteractions.readPosition
+import marsroverkata.GameInteractions.welcome
 
 object Game {
 
