@@ -38,7 +38,7 @@ object UseCases {
             ask("Waiting commands...").map { s -> parseCommands(s) }
 
     fun handleCommands(r: Rover, cs: List<Command>): Rover = when {
-        cs.isNotEmpty() -> handleCommand(r, cs[0]).fold({ r }, { r -> handleCommands(r, cs.tail()) })
+        cs.isNotEmpty() -> handleCommand(r, cs[0]).fold({ r }, { nextRover -> handleCommands(nextRover, cs.tail()) })
         else -> r
     }
 

@@ -1,6 +1,6 @@
 package marsroverkata
 
-import junit.framework.Assert.assertEquals
+import org.junit.Assert.assertEquals
 import org.junit.Test
 import java.io.*
 
@@ -208,16 +208,19 @@ class GameTests {
         value.joinToString(enter) + enter
 
     private fun execute(value: String): String  {
+        val swapStreams = {inputStream: InputStream, printStream: PrintStream ->
+            System.setIn(inputStream)
+            System.setOut(printStream)
+        }
         val initialOut = System.out
         val initialIn = System.`in`
         val byteArrayOutputStream = ByteArrayOutputStream()
-        System.setIn(ByteArrayInputStream(value.toByteArray()))
-        System.setOut(PrintStream(byteArrayOutputStream))
+        swapStreams(ByteArrayInputStream(value.toByteArray()), PrintStream(byteArrayOutputStream))
         Game.run()
-        System.setIn(initialIn)
-        System.setOut(initialOut)
+        swapStreams(initialIn, initialOut)
         return byteArrayOutputStream.toString()
     }
+
 
     private val enter = System.getProperty("line.separator")
 
