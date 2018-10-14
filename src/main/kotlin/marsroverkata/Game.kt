@@ -11,7 +11,7 @@ import marsroverkata.UseCases.readPlanet
 import marsroverkata.UseCases.readPosition
 import marsroverkata.UseCases.welcome
 
-class Game {
+object Game {
 
     fun run() {
         runIO().unsafeRunSync()
