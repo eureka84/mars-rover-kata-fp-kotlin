@@ -1,24 +1,16 @@
 package marsroverkata
 
-import arrow.core.Option
-import arrow.core.Some
 import arrow.effects.IO
-import arrow.syntax.collections.tail
 import marsroverkata.Data.Command
-import marsroverkata.Data.Command.*
 import marsroverkata.Data.Planet
 import marsroverkata.Data.Position
 import marsroverkata.Data.Rover
-import marsroverkata.Parsers.parseCommands
-import marsroverkata.Parsers.parseObstacles
-import marsroverkata.Parsers.parsePlanet
-import marsroverkata.Parsers.parsePosition
-import marsroverkata.RoverActions.moveBackward
-import marsroverkata.RoverActions.moveForward
-import marsroverkata.RoverActions.rotateLeft
-import marsroverkata.RoverActions.rotateRight
 import marsroverkata.IoOps.ask
 import marsroverkata.IoOps.puts
+import marsroverkata.DataParsers.parseCommands
+import marsroverkata.DataParsers.parseObstacles
+import marsroverkata.DataParsers.parsePlanet
+import marsroverkata.DataParsers.parsePosition
 
 
 object GameInteractions {
@@ -36,19 +28,6 @@ object GameInteractions {
 
     fun readCommands(): IO<List<Command>> =
             ask("Waiting commands...").map { s -> parseCommands(s) }
-
-    fun handleCommands(r: Rover, cs: List<Command>): Rover = when {
-        cs.isNotEmpty() -> handleCommand(r, cs[0]).fold({ r }, { nextRover -> handleCommands(nextRover, cs.tail()) })
-        else -> r
-    }
-
-    private fun handleCommand(r: Rover, c: Command): Option<Rover> = when (c) {
-        TurnRight -> Some(rotateRight(r))
-        TurnLeft -> Some(rotateLeft(r))
-        MoveForward -> moveForward(r).map { p -> r.copy(position = p) }
-        MoveBackward -> moveBackward(r).map { p -> r.copy(position = p) }
-        UnknownCommand -> Some(r)
-    }
 
     fun display(r: Rover): IO<Unit> = puts("${r.direction}:${r.position.x},${r.position.y}")
 

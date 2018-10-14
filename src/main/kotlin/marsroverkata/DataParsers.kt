@@ -5,7 +5,7 @@ import marsroverkata.Data.Command.*
 import marsroverkata.Data.Planet
 import marsroverkata.Data.Position
 
-object Parsers {
+object DataParsers {
 
     fun parsePlanet(s: String): Planet {
         val tokens = s.split("x")

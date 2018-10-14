@@ -3,13 +3,13 @@ package marsroverkata
 import arrow.effects.IO
 import marsroverkata.Data.Direction.N
 import marsroverkata.Data.Rover
-import marsroverkata.GameInteractions.display
-import marsroverkata.GameInteractions.handleCommands
-import marsroverkata.GameInteractions.readCommands
-import marsroverkata.GameInteractions.readObstacles
-import marsroverkata.GameInteractions.readPlanet
-import marsroverkata.GameInteractions.readPosition
 import marsroverkata.GameInteractions.welcome
+import marsroverkata.GameInteractions.readPlanet
+import marsroverkata.GameInteractions.readObstacles
+import marsroverkata.GameInteractions.readPosition
+import marsroverkata.GameInteractions.readCommands
+import marsroverkata.GamePlay.handleCommands
+import marsroverkata.GameInteractions.display
 
 object Game {
 
