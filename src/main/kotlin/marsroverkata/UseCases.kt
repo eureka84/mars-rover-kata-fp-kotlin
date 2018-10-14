@@ -17,23 +17,25 @@ import marsroverkata.RoverActions.moveBackward
 import marsroverkata.RoverActions.moveForward
 import marsroverkata.RoverActions.rotateLeft
 import marsroverkata.RoverActions.rotateRight
+import marsroverkata.IoOps.ask
+import marsroverkata.IoOps.puts
 
 
 object UseCases {
 
-    fun welcome() = IoOps.puts("Welcome to the Mars Rover Kata!")
+    fun welcome() = puts("Welcome to the Mars Rover Kata!")
 
     fun readPlanet(): IO<Planet> =
-            IoOps.ask("What is the size of the planet?").map { s -> parsePlanet(s) }
+            ask("What is the size of the planet?").map { s -> parsePlanet(s) }
 
     fun readObstacles(): IO<List<Position>> =
-            IoOps.ask("Where are the obstacles?").map { s -> parseObstacles(s) }
+            ask("Where are the obstacles?").map { s -> parseObstacles(s) }
 
     fun readPosition(): IO<Position> =
-            IoOps.ask("What is the position of the rover?").map { s -> parsePosition(s) }
+            ask("What is the position of the rover?").map { s -> parsePosition(s) }
 
     fun readCommands(): IO<List<Command>> =
-            IoOps.ask("Waiting commands...").map { s -> parseCommands(s) }
+            ask("Waiting commands...").map { s -> parseCommands(s) }
 
     fun handleCommands(r: Rover, cs: List<Command>): Rover = when {
         cs.isNotEmpty() -> handleCommand(r, cs[0]).fold({ r }, { r -> handleCommands(r, cs.tail()) })
@@ -48,6 +50,6 @@ object UseCases {
         UnknownCommand -> Some(r)
     }
 
-    fun display(r: Rover): IO<Unit> = IoOps.puts("${r.direction}:${r.position.x},${r.position.y}")
+    fun display(r: Rover): IO<Unit> = puts("${r.direction}:${r.position.x},${r.position.y}")
 
 }
