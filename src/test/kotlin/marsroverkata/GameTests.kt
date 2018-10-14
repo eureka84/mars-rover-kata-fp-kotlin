@@ -213,7 +213,7 @@ class GameTests {
         val byteArrayOutputStream = ByteArrayOutputStream()
         System.setIn(ByteArrayInputStream(value.toByteArray()))
         System.setOut(PrintStream(byteArrayOutputStream))
-        marsroverkata.Game().run()
+        Game.run()
         System.setIn(initialIn)
         System.setOut(initialOut)
         return byteArrayOutputStream.toString()
