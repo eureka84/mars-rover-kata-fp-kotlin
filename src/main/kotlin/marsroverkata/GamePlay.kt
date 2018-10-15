@@ -20,7 +20,11 @@ typealias Result = Pair<Boolean, Rover>
 object GamePlay {
 
     fun handleCommands(r: Rover, cs: List<Command>): Result = when {
-        cs.isNotEmpty() -> handleCommand(r, cs[0]).fold({ Result(true, r) }, { nextRover -> handleCommands(nextRover, cs.tail()) })
+        cs.isNotEmpty() ->
+            handleCommand(r, cs[0]).fold(
+                    { Result(true, r) },
+                    { nextRover -> handleCommands(nextRover, cs.tail()) }
+            )
         else -> Result(false , r)
     }
 

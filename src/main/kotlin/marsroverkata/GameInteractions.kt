@@ -30,7 +30,7 @@ object GameInteractions {
 
     fun display(result: Result): IO<Unit> {
         val (hitObstacle, rover) = result
-        val prefix = if (hitObstacle) "O-" else ""
+        val prefix = if (hitObstacle) "O:" else ""
         return puts("$prefix${rover.direction}:${rover.position.x},${rover.position.y}")
     }
 

@@ -20,9 +20,9 @@ object Game {
     private fun runIO(): IO<Unit> =
             welcome()
                     .flatMap { readPlanet() }
-                    .flatMap { p -> readObstacles().map { obs -> p.copy(obstacles = obs) } }
-                    .flatMap { p -> readPosition().map { pos -> Rover(position = pos, direction = N, planet = p) } }
-                    .flatMap { r -> readCommands().map { cs -> handleCommands(r, cs) } }
-                    .flatMap { r -> display(r) }
+                    .flatMap { planet -> readObstacles().map { obs -> planet.copy(obstacles = obs) } }
+                    .flatMap { planet -> readPosition().map { pos -> Rover(position = pos, direction = N, planet = planet) } }
+                    .flatMap { rover -> readCommands().map { cs -> handleCommands(rover, cs) } }
+                    .flatMap { (hit, rover) -> display(Result(hit,rover)) }
 
 }
