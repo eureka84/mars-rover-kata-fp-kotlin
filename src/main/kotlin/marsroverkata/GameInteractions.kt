@@ -4,7 +4,6 @@ import arrow.effects.IO
 import marsroverkata.Data.Command
 import marsroverkata.Data.Planet
 import marsroverkata.Data.Position
-import marsroverkata.Data.Rover
 import marsroverkata.IoOps.ask
 import marsroverkata.IoOps.puts
 import marsroverkata.DataParsers.parseCommands
@@ -29,6 +28,10 @@ object GameInteractions {
     fun readCommands(): IO<List<Command>> =
             ask("Waiting commands...").map { s -> parseCommands(s) }
 
-    fun display(r: Rover): IO<Unit> = puts("${r.direction}:${r.position.x},${r.position.y}")
+    fun display(result: Result): IO<Unit> {
+        val (hitObstacle, rover) = result
+        val prefix = if (hitObstacle) "O-" else ""
+        return puts("$prefix${rover.direction}:${rover.position.x},${rover.position.y}")
+    }
 
 }

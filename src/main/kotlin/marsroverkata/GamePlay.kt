@@ -15,11 +15,13 @@ import marsroverkata.Data.Command.MoveForward
 import marsroverkata.Data.Command.MoveBackward
 import marsroverkata.Data.Command.UnknownCommand
 
+typealias Result = Pair<Boolean, Rover>
+
 object GamePlay {
 
-    fun handleCommands(r: Rover, cs: List<Command>): Rover = when {
-        cs.isNotEmpty() -> handleCommand(r, cs[0]).fold({ r }, { nextRover -> handleCommands(nextRover, cs.tail()) })
-        else -> r
+    fun handleCommands(r: Rover, cs: List<Command>): Result = when {
+        cs.isNotEmpty() -> handleCommand(r, cs[0]).fold({ Result(true, r) }, { nextRover -> handleCommands(nextRover, cs.tail()) })
+        else -> Result(false , r)
     }
 
     private fun handleCommand(r: Rover, c: Command): Option<Rover> = when (c) {

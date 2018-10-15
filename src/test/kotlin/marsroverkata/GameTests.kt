@@ -45,7 +45,7 @@ class GameTests {
                 "Where are the obstacles?",
                 "What is the position of the rover?",
                 "Waiting commands...",
-                "W:0,1"
+                "O-W:0,1"
         )
 
         assertEquals(result, expected)
