@@ -207,7 +207,7 @@ class GameTests {
     private fun outputs(vararg value: String): String =
         value.joinToString(enter) + enter
 
-    private fun execute(value: String): String  {
+    private fun execute(inputs: String): String  {
         val swapStreams = {inputStream: InputStream, printStream: PrintStream ->
             System.setIn(inputStream)
             System.setOut(printStream)
@@ -215,7 +215,7 @@ class GameTests {
         val initialOut = System.out
         val initialIn = System.`in`
         val byteArrayOutputStream = ByteArrayOutputStream()
-        swapStreams(ByteArrayInputStream(value.toByteArray()), PrintStream(byteArrayOutputStream))
+        swapStreams(ByteArrayInputStream(inputs.toByteArray()), PrintStream(byteArrayOutputStream))
         Game.run()
         swapStreams(initialIn, initialOut)
         return byteArrayOutputStream.toString()
