@@ -3,28 +3,30 @@ package marsroverkata
 import arrow.core.None
 import arrow.core.Option
 import arrow.core.Some
+import arrow.syntax.collections.firstOption
 import arrow.syntax.collections.tail
-import marsroverkata.Data.Direction.*
-import marsroverkata.Data.Rover
-import marsroverkata.Data.Position
-import marsroverkata.Data.Planet
 import marsroverkata.Data.Command
-import marsroverkata.Data.Command.TurnRight
-import marsroverkata.Data.Command.TurnLeft
-import marsroverkata.Data.Command.MoveForward
-import marsroverkata.Data.Command.MoveBackward
-import marsroverkata.Data.Command.UnknownCommand
+import marsroverkata.Data.Command.*
+import marsroverkata.Data.Direction.*
+import marsroverkata.Data.Planet
+import marsroverkata.Data.Position
+import marsroverkata.Data.Rover
 
 typealias Result = Pair<Boolean, Rover>
 
 object GamePlay {
 
-    fun handleCommands(r: Rover, cs: List<Command>): Result = when {
-        cs.isNotEmpty() ->
-            handleCommand(r, cs[0])
-                .fold({ Result(true, r) }, { nextRover -> handleCommands(nextRover, cs.tail()) })
-        else -> Result(false , r)
-    }
+    fun handleCommands(r: Rover, cs: List<Command>): Result =
+        cs.firstOption()
+            .fold(
+                { Result(false, r)},
+                { c -> handleCommand(r, c)
+                        .fold(
+                            { Result(true, r) },
+                            { nextRover -> handleCommands(nextRover, cs.tail()) }
+                        )
+                }
+            )
 
     private fun handleCommand(r: Rover, c: Command): Option<Rover> = when (c) {
         TurnRight -> Some(rotateRight(r))
