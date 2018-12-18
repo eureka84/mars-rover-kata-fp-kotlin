@@ -7,28 +7,31 @@ import marsroverkata.Data.Position
 
 object DataParsers {
 
-    fun parsePlanet(s: String): Planet {
+    val parsePlanet: (String) -> Planet = { s: String ->
         val tokens = s.split("x")
-        return Planet(tokens[0].toInt(), tokens[1].toInt())
+        Planet(tokens[0].toInt(), tokens[1].toInt())
     }
 
-    fun parseObstacles(s: String): List<Position> =
-            if (s.isEmpty()) listOf()
-            else s.split("/").asSequence().map(this::parsePosition).toList()
+    val parseObstacles: (String) -> List<Position> = { s: String ->
+        if (s.isEmpty()) listOf()
+        else s.split("/").asSequence().map(parsePosition).toList()
+    }
 
-    fun parsePosition(s: String): Position {
+    val parsePosition: (String) -> Position = { s: String ->
         val tokens = s.split(",")
-        return Position(tokens[0].toInt(), tokens[1].toInt())
+        Position(tokens[0].toInt(), tokens[1].toInt())
     }
 
-    fun parseCommands(s: String): List<Command> = s.map(this::parseCommand).toList()
+    val parseCommands: (String) -> List<Command> = { s: String -> s.map(parseCommand).toList() }
 
-    private fun parseCommand(c: Char): Command = when (c) {
-        'l' -> TurnLeft
-        'r' -> TurnRight
-        'f' -> MoveForward
-        'b' -> MoveBackward
-        else -> UnknownCommand
+    private val parseCommand: (Char) -> Command = { c: Char ->
+        when (c) {
+            'l' -> TurnLeft
+            'r' -> TurnRight
+            'f' -> MoveForward
+            'b' -> MoveBackward
+            else -> UnknownCommand
+        }
     }
 
 }

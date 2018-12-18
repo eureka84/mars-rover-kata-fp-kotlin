@@ -11,22 +11,21 @@ import marsroverkata.DataParsers.parseObstacles
 import marsroverkata.DataParsers.parsePlanet
 import marsroverkata.DataParsers.parsePosition
 
-
 object GameInteractions {
 
     fun welcome() = puts("Welcome to the Mars Rover Kata!")
 
     fun readPlanet(): IO<Planet> =
-            ask("What is the size of the planet?").map { s -> parsePlanet(s) }
+            ask("What is the size of the planet?").map(parsePlanet)
 
     fun readObstacles(): IO<List<Position>> =
-            ask("Where are the obstacles?").map { s -> parseObstacles(s) }
+            ask("Where are the obstacles?").map(parseObstacles)
 
     fun readPosition(): IO<Position> =
-            ask("What is the position of the rover?").map { s -> parsePosition(s) }
+            ask("What is the position of the rover?").map(parsePosition)
 
     fun readCommands(): IO<List<Command>> =
-            ask("Waiting commands...").map { s -> parseCommands(s) }
+            ask("Waiting commands...").map(parseCommands)
 
     fun display(result: Result): IO<Unit> {
         val (hitObstacle, rover) = result
