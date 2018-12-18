@@ -3,14 +3,10 @@ package marsroverkata
 import arrow.effects.IO
 
 object IoOps {
-    fun ask(question: String) =
-            puts(question).flatMap { reads() }
 
-    fun puts(str: String): IO<Unit> = IO {
-        println(str)
-    }
+    val ask: (String) -> IO<String> = { question -> puts(question).flatMap(reads) }
 
-    private fun reads(): IO<String> = IO {
-        readLine()!!
-    }
+    val puts: (String) -> IO<Unit> = { str -> IO { println(str) } }
+
+    private val reads: (Unit) -> IO<String> = { IO { readLine()!! } }
 }
