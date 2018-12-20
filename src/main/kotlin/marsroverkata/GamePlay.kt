@@ -8,7 +8,6 @@ import arrow.syntax.collections.tail
 
 data class Result(val hitObstacle: Boolean, val rover: Rover)
 
-
 fun handleCommands(r: Rover, cs: List<Command>): Result =
         cs.firstOption()
                 .fold(
@@ -23,39 +22,39 @@ fun handleCommands(r: Rover, cs: List<Command>): Result =
                 )
 
 private fun handleCommand(r: Rover, c: Command): Option<Rover> = when (c) {
-    TurnRight -> Some(rotateRight(r))
-    TurnLeft -> Some(rotateLeft(r))
-    MoveForward -> moveForward(r).map { p -> r.copy(position = p) }
-    MoveBackward -> moveBackward(r).map { p -> r.copy(position = p) }
-    UnknownCommand -> Some(r)
+    Command.TurnRight -> Some(rotateRight(r))
+    Command.TurnLeft -> Some(rotateLeft(r))
+    Command.MoveForward -> moveForward(r).map { p -> r.copy(position = p) }
+    Command.MoveBackward -> moveBackward(r).map { p -> r.copy(position = p) }
+    Command.UnknownCommand -> Some(r)
 }
 
 private fun rotateRight(r: Rover): Rover = r.copy(direction = when (r.direction) {
-    N -> E
-    E -> S
-    S -> W
-    W -> N
+    Direction.N -> Direction.E
+    Direction.E -> Direction.S
+    Direction.S -> Direction.W
+    Direction.W -> Direction.N
 })
 
 private fun rotateLeft(r: Rover): Rover = r.copy(direction = when (r.direction) {
-    N -> W
-    W -> S
-    S -> E
-    E -> N
+    Direction.N -> Direction.W
+    Direction.W -> Direction.S
+    Direction.S -> Direction.E
+    Direction.E -> Direction.N
 })
 
 private fun moveForward(r: Rover): Option<Position> = when (r.direction) {
-    S -> moveSouth(r.position, r.planet)
-    N -> moveNorth(r.position, r.planet)
-    E -> moveEast(r.position, r.planet)
-    W -> moveWest(r.position, r.planet)
+    Direction.S -> moveSouth(r.position, r.planet)
+    Direction.N -> moveNorth(r.position, r.planet)
+    Direction.E -> moveEast(r.position, r.planet)
+    Direction.W -> moveWest(r.position, r.planet)
 }
 
 private fun moveBackward(r: Rover): Option<Position> = when (r.direction) {
-    S -> moveNorth(r.position, r.planet)
-    N -> moveSouth(r.position, r.planet)
-    E -> moveWest(r.position, r.planet)
-    W -> moveEast(r.position, r.planet)
+    Direction.S -> moveNorth(r.position, r.planet)
+    Direction.N -> moveSouth(r.position, r.planet)
+    Direction.E -> moveWest(r.position, r.planet)
+    Direction.W -> moveEast(r.position, r.planet)
 }
 
 private fun moveSouth(position: Position, planet: Planet): Option<Position> {

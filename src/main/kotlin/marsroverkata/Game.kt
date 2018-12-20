@@ -13,7 +13,7 @@ object Game {
                     .flatMap { readPlanet() }
                     .flatMap { planet -> readObstacles().map { obs -> planet.copy(obstacles = obs) } }
                     .flatMap { planet -> readPosition().map { pos ->
-                        Rover(position = pos, direction = N, planet = planet) }
+                        Rover(position = pos, direction = Direction.N, planet = planet) }
                     }
                     .flatMap { rover -> readCommands().map { cs -> handleCommands(rover, cs) } }
                     .flatMap { result -> display(result) }

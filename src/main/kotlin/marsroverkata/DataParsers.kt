@@ -19,10 +19,10 @@ val parseCommands: (String) -> List<Command> = { s: String -> s.map(parseCommand
 
 private val parseCommand: (Char) -> Command = { c: Char ->
     when (c) {
-        'l' -> TurnLeft
-        'r' -> TurnRight
-        'f' -> MoveForward
-        'b' -> MoveBackward
-        else -> UnknownCommand
+        'l' -> Command.TurnLeft
+        'r' -> Command.TurnRight
+        'f' -> Command.MoveForward
+        'b' -> Command.MoveBackward
+        else -> Command.UnknownCommand
     }
 }
