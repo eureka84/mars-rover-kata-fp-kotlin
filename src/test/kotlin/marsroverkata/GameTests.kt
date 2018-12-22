@@ -2,7 +2,10 @@ package marsroverkata
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import java.io.*
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
+import java.io.InputStream
+import java.io.PrintStream
 
 class GameTests {
 
